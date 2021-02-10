@@ -51,7 +51,9 @@ var _cellSelected = function(event) {
             console.log("Error Occurred", xhr.responseText);
             alert("Ohhoo! Some Error Occurred");
         }
+        _showLoader(false);
     }
+    _showLoader(true);
     xhr.send(JSON.stringify(request));
 }
 
@@ -82,6 +84,17 @@ var _updateBoard = function(response) {
         document.getElementById("turn-message").innerHTML = `Player ${response.next_turn.toUpperCase()} take your turn `;
         document.getElementById('gamebox').className = response.next_turn;
     }
+}
+
+var _showLoader = function(choice) {
+    // if (choice) {
+    //     document.querySelectorAll('.grid-cell').forEach(x => x.classList.add('no-hover'))
+    //     document.getElementById("loader").style.visibility = "visible"
+    // } else {
+    //     document.querySelectorAll('.grid-cell').forEach(x => x.classList.remove('no-hover'))
+    //     document.getElementById("loader").style.visibility = "hidden";
+    // }
+
 }
 
 window.addEventListener("load", function(event) {

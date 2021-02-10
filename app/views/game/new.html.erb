@@ -13,8 +13,10 @@
 <% end %>
 </main>
 
+<%# To print the user with current turn %>
 <p id="turn-message"></p>
 
+<%# used to show results at the end of the game %>
 <div id="results">
   <aside>
     <span id="result-message">
@@ -24,3 +26,5 @@
     </nav>
   </aside>
 </div>
+
+<%= render 'loader' %>

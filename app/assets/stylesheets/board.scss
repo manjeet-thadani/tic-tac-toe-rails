@@ -37,7 +37,7 @@ aside nav a {
     /*background: rgba(100, 100, 100, 0.1);*/
 }
 
-aside nav a:hover {
+aside nav a:not(.no-hover):hover {
     background: rgba(100, 100, 100, 0.1);
 }
 
@@ -84,7 +84,7 @@ main nav a.btn {
     width: 100%;
 }
 
-main nav a:hover {
+main nav a:not(.no-hover):hover {
     background: #f8f8f8;
 }
 
@@ -101,13 +101,13 @@ main.disable nav a {
     cursor: default;
 }
 
-main nav a:hover:after,
+main nav a:not(.no-hover):hover:after,
 main nav a.o:after,
 main nav a.x:after {
     display: block;
 }
 
-main.o nav a:hover:after,
+main.o nav a:not(.no-hover):hover:after,
 main nav a.o:after {
     content: 'O';
     color: blue;
@@ -115,7 +115,7 @@ main nav a.o:after {
     text-align: center;
 }
 
-main.x nav a:hover:after,
+main.x nav a:not(.no-hover):hover:after,
 main nav a.x:after {
     content: 'X';
     color: red;
