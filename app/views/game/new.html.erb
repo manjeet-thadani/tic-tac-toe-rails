@@ -2,29 +2,22 @@
 <p id="grid-size" hidden><%= @game.board.size %></p>
 <p id="first-player" hidden><%= @game.first_player %></p>
 
-<main id="gamebox" class="<%= @game.first_player %>">
-<% (0...@game.board.size).each do |row| %>
-  <nav class="grid-row">
-  <% (0...@game.board.size).each do |col| %>
-    <% index = (@game.board.size * row) + col %>
-      <a id="<%= index %>" class="grid-cell <%= (@game.board.cells[index] != 'x' && @game.board.cells[index] != 'o') ? '' : @game.board.cells[index].downcase  %>"></a>
+<%# TODO: get this value from API %>
+<p id="computer-mode" hidden><%= @game.player_1_type == "computer" || @game.player_2_type == "computer" %></p>
+
+<div class="game">
+  <h1 class="title">Tic Tac Toe</h1>
+  <div class="board">
+  <% (0...@game.board.cells.length).each do |index| %>
+    <div id="<%= index %>" class="cell <%= (@game.board.cells[index] != 'x' && @game.board.cells[index] != 'o') ? '' : @game.board.cells[index].downcase  %>"></div>
   <% end %>
-  </nav>
-<% end %>
-</main>
+  </div>
 
-<%# To print the user with current turn %>
-<p id="turn-message"></p>
+  <div class="message-bar">
+    <p id="message"></p>
+  </div>
 
-<%# used to show results at the end of the game %>
-<div id="results">
-  <aside>
-    <span id="result-message">
-    </span>
-    <nav>
-      <a href="/">New Game</a>
-    </nav>
-  </aside>
+  <a id="reset" href="/">
+    New Game!
+  </div>
 </div>
-
-<%= render 'loader' %>
