@@ -2,19 +2,18 @@ class GameController < ApplicationController
   protect_from_forgery with: :null_session
 
   def index
+    @game = Game.new
   end
 
-  def new
-    # TODO: take input from user
+  # POST /games
+  def start
+    # TODO: validate input data
+    mode = params[:mode]
+
     @game = Game.setup_board
-    @game.init
-  end
+    @game.init(mode)
 
-  def game_state
-    game = Game.find(params[:id].to_i)
-    game.board = Board.new(size: 3, cells: board_params) # TODO: do not hardcode size
-    
-    render json: GameState.format(game)
+    render :new
   end
 
   def move

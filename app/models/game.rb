@@ -6,9 +6,9 @@ class Game < ApplicationRecord
     return game
   end
 
-  def init(player_1_type = 'human', player_2_type = 'computer')
-    self.player_1_type = player_1_type
-    self.player_2_type = player_2_type
+  def init(mode = 'computer')
+    self.player_1_type = 'human'
+    self.player_2_type = mode == 'computer' ? 'computer' : 'human'
 
     self.player_1_marker = 'x' 
     self.player_2_marker = 'o'

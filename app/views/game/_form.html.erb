@@ -1,0 +1,15 @@
+<%= form_with(model: @game, local: true) do |f| %>
+
+<div class="menu">
+  <h1 class="title">Tic Tac Toe</h1>
+
+  <%= image_tag("ttt.png", :alt => "Tic Tac Toe") %>
+
+  <br />
+
+  <h3 class="mode-title">Mode:</h3>
+  <%= select_tag(:option, options_for_select([["Single Player","computer"],["Dual Players","human"]], params[:option] ), class:"select-css", name: "mode") %>
+
+  <%= submit_tag "Start Game!", class: "form-submit" %>
+<div>
+<% end %>

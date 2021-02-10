@@ -45,7 +45,7 @@ var _cellSelected = function(event) {
     cell.className = "cell " + currentPlayerMarker;
 
     var message = "Processing! Please wait..."
-    if (computerMode) {
+    if (computerMode == "true") {
         message = "Computer's Turn. It's thinking..."
     }
 
@@ -64,11 +64,9 @@ var _cellSelected = function(event) {
             console.error("Error Occurred", xhr.responseText);
             alert("Ohhoo! Some Error Occurred");
         }
-        _showLoader(false);
 
         reqInProgress = false
     }
-    _showLoader(true);
 
     reqInProgress = true
     xhr.send(JSON.stringify(request));
@@ -103,17 +101,6 @@ var _updateBoard = function(response) {
     }
 
     currentPlayerMarker = response.next_turn;
-}
-
-var _showLoader = function(choice) {
-    // if (choice) {
-    //     document.querySelectorAll('.grid-cell').forEach(x => x.classList.add('no-hover'))
-    //     document.getElementById("loader").style.visibility = "visible"
-    // } else {
-    //     document.querySelectorAll('.grid-cell').forEach(x => x.classList.remove('no-hover'))
-    //     document.getElementById("loader").style.visibility = "hidden";
-    // }
-
 }
 
 window.addEventListener("load", function(event) {
