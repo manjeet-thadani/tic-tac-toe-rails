@@ -1,16 +1,26 @@
 <p id="game-id" hidden><%= @game.id %></p>
-
-<p id="current-player"><%= @game.player_1_type %></p>
-
+<p id="grid-size" hidden><%= @game.board.size %></p>
+<p id="first-player" hidden><%= @game.first_player %></p>
 
 <main id="gamebox" class="<%= @game.first_player %>">
 <% (0...@game.board.size).each do |row| %>
   <nav class="grid-row">
   <% (0...@game.board.size).each do |col| %>
     <% index = (@game.board.size * row) + col %>
-      <a id="<%= index + 1 %>" class="grid-cell <%= (@game.board.cells[index] != 'x' && @game.board.cells[index] != 'o') ? '' : @game.board.cells[index].downcase  %>"></a>
+      <a id="<%= index %>" class="grid-cell <%= (@game.board.cells[index] != 'x' && @game.board.cells[index] != 'o') ? '' : @game.board.cells[index].downcase  %>"></a>
   <% end %>
   </nav>
 <% end %>
 </main>
 
+<p id="turn-message"></p>
+
+<div id="results">
+  <aside>
+    <span id="result-message">
+    </span>
+    <nav>
+      <a href="/">New Game</a>
+    </nav>
+  </aside>
+</div>

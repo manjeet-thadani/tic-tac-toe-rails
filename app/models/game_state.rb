@@ -1,6 +1,7 @@
 class GameState
   def self.format(game, player_turn = true)
-    next_turn = game.board.over? ? nil : @game.current_player
+    next_turn = game.board.over? ? nil : game.current_player
+    winner = game.board.over? ? game.board.winner : nil
 
     return {
       id: game.id,
@@ -10,6 +11,7 @@ class GameState
       player_1_type: game.player_1_type,
       player_2_type: game.player_2_type,
       next_turn: next_turn,
+      winner: winner,
       board: game.board.cells
     }
   end
