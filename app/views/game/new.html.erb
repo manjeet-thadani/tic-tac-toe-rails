@@ -1,0 +1,16 @@
+<p id="game-id" hidden><%= @game.id %></p>
+
+<p id="current-player"><%= @game.player_1_type %></p>
+
+
+<main id="gamebox" class="<%= @game.first_player %>">
+<% (0...@game.board.size).each do |row| %>
+  <nav class="grid-row">
+  <% (0...@game.board.size).each do |col| %>
+    <% index = (@game.board.size * row) + col %>
+      <a id="<%= index + 1 %>" class="grid-cell <%= (@game.board.cells[index] != 'x' && @game.board.cells[index] != 'o') ? '' : @game.board.cells[index].downcase  %>"></a>
+  <% end %>
+  </nav>
+<% end %>
+</main>
+
