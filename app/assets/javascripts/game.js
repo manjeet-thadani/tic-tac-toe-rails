@@ -81,7 +81,6 @@ var _updateBoard = function(response) {
         }
     }
 
-    // TODO: check if game over OR win OR draw
     if (response.game_over) {
         gameOver = true;
         document.getElementById("message").innerHTML = "";
