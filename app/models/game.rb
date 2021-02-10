@@ -1,20 +1,20 @@
 class Game < ApplicationRecord
   attr_accessor :board
 
-  before_create :init
-
-  def self.setup(size = 3)
+  def self.setup_board(size = 3)
     game = self.create(board: Board.new(size: size))
     return game
   end
 
-  def init
-    self.player_1_type = "human"
-    self.player_2_type = "human"
+  def init(player_1_type = 'human', player_2_type = 'computer')
+    self.player_1_type = player_1_type
+    self.player_2_type = player_2_type
 
     self.player_1_marker = 'x' 
     self.player_2_marker = 'o'
     self.first_player = self.player_1_marker
+
+    self.save
   end
 
   def player_2
@@ -26,8 +26,8 @@ class Game < ApplicationRecord
   end
 
   def computer?(marker)
-    (self.player_1_marker = marker && self.player_1_type == 'computer') || 
-        (self.player_2_marker = marker && self.player_2_type == 'computer')
+    (self.player_1_marker == marker && self.player_1_type == 'computer') || 
+        (self.player_2_marker == marker && self.player_2_type == 'computer')
   end
   
   def computer

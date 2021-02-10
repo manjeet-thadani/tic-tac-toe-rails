@@ -3,7 +3,7 @@ class ComputerMove
     if board.empty?
       # TODO: get corners
       return board.corners.sample
-    elsif board.tie?
+    elsif board.draw?
       return 0
     elsif board.over?
       return -10

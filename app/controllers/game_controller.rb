@@ -3,7 +3,8 @@ class GameController < ApplicationController
 
   def new
     # TODO: take input from user
-    @game = Game.setup
+    @game = Game.setup_board
+    @game.init
   end
 
   def move
@@ -13,13 +14,15 @@ class GameController < ApplicationController
     game.board = Board.new(size: 3, cells: board_params) # TODO: do not hardcode size
 
     if ! game.board.is_valid_input?(position)
-      render json: { message: 'nvalid move' }, status: bad_request
+      render json: { message: 'Invalid move' }, status: bad_request
+    elsif game.computer?(game.current_player)
+      render json: { message: 'Invalid! It is computer turn' }, status: :bad_request
     else
       player = game.current_player
-      if game.computer?(player)
-        game = ComputerPlayer.updated_board_state(game) unless game.board.over?
-      else
-        game.board.place_marker(player, position)
+      game.board.place_marker(player, position)
+
+      if !game.board.over? && game.computer?(game.current_player)
+        game = computer_move(game)
       end
 
       render json: GameState.format(game)
@@ -27,6 +30,10 @@ class GameController < ApplicationController
   end
 
   private
+
+  def computer_move(game)
+    ComputerPlayer.updated_board_state(game) unless game.board.over?
+  end
 
   def board_params
     params[:board].map { |c| c.empty? ? nil : c }

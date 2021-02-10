@@ -6,10 +6,7 @@ class GameState
     return {
       id: game.id,
       game_over: game.board.over?,
-      player_1_marker: game.player_1_marker,
-      player_2_marker: game.player_2_marker,
-      player_1_type: game.player_1_type,
-      player_2_type: game.player_2_type,
+      computer_marker: game.computer,
       next_turn: next_turn,
       winner: winner,
       board: game.board.cells
