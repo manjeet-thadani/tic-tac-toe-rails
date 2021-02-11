@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :games, only: [:index]
+  resources :game
   
   root 'game#index'
   post '/move', to: 'game#move'

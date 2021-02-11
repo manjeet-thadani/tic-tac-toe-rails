@@ -5,6 +5,12 @@ class GameController < ApplicationController
     @game = Game.new
   end
 
+  def new
+    id = params[:id]
+    @game = Game.find(id)
+    @game.board = Board.new
+  end
+
   # POST /games
   def start
     # TODO: validate input data
@@ -13,13 +19,13 @@ class GameController < ApplicationController
     @game = Game.setup_board
     @game.init(mode)
 
-    render :new
+    redirect_to :action => 'new', id: @game.id
   end
 
   def move
     game = Game.find(params[:id].to_i)
     position = params[:position].to_i
-    game.board = Board.new(size: 3, cells: board_params) # TODO: do not hardcode size
+    game.board = Board.new(size: 3, cells: board_params)
 
     if ! game.board.is_valid_input?(position)
       render json: { message: 'Invalid move' }, status: bad_request
