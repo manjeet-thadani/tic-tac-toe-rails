@@ -8,16 +8,16 @@ class GameController < ApplicationController
   def new
     id = params[:id]
     @game = Game.find(id)
-    @game.board = Board.new
+    @game.board = Board.new(cells: @game.cells)
   end
 
   # POST /games
   def start
     # TODO: validate input data
     mode = params[:mode]
+    @game = Game.setup
 
-    @game = Game.setup_board
-    @game.init(mode)
+    p @game.cells
 
     redirect_to :action => 'new', id: @game.id
   end
@@ -25,7 +25,8 @@ class GameController < ApplicationController
   def move
     game = Game.find(params[:id].to_i)
     position = params[:position].to_i
-    game.board = Board.new(size: 3, cells: board_params)
+    # TODO store this in array
+    game.board = Board.new(size: 3, cells: game.cells)
 
     if ! game.board.is_valid_input?(position)
       render json: { message: 'Invalid move' }, status: bad_request
@@ -40,6 +41,9 @@ class GameController < ApplicationController
       if !game.board.over? && game.computer?(game.current_player)
         game = computer_move(game)
       end
+
+      game.cells = game.board.cells
+      game.save
 
       render json: GameState.format(game)
     end

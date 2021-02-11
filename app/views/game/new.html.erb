@@ -7,8 +7,8 @@
 <div class="game">
   <h1 class="title">Tic Tac Toe</h1>
   <div class="board">
-  <% (0...@game.board.cells.length).each do |index| %>
-    <div id="<%= index %>" class="cell <%= (@game.board.cells[index] != 'x' && @game.board.cells[index] != 'o') ? '' : @game.board.cells[index].downcase  %>"></div>
+  <% @game.board.cells.each_with_index do |val, index| %>
+    <div id="<%= index %>" class="cell <%= (val != 'x' && val != 'o') ? '' : val.downcase  %>"></div>
   <% end %>
   </div>
 

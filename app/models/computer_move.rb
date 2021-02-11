@@ -1,6 +1,7 @@
 class ComputerMove
   def negamax(board, player1, player2, depth = 0)
-    if board.empty?
+    # TODO for 2nd turn too
+    if board.empty? 
       return board.corners.sample
     elsif board.draw?
       return 0

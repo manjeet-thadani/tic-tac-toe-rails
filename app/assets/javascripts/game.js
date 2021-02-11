@@ -17,7 +17,7 @@ var ttt =
             boardCells = Array(boardSize * boardSize).fill("");
 
             // set turn to player X
-            document.getElementById("message").innerHTML = "Player " + firstPlayerMarker + " take your turn";
+            document.getElementById("message").innerHTML = "Player " + firstPlayerMarker.toUpperCase() + " take your turn";
 
             _setListeners();
         }
@@ -40,7 +40,6 @@ var ttt =
             var request = {
                 "id": gameId,
                 "position": selectedPosition,
-                "board": boardCells
             };
 
             // update cell to show selected position till API response is obtained
