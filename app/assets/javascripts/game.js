@@ -121,7 +121,7 @@ var ttt =
         }
 
         return {
-            setup,
+            setup
         }
     }();
 
