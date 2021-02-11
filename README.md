@@ -1,4 +1,8 @@
 # Tic-Tac-Toe Rails
+
+Try it now!
+https://calm-temple-22209.herokuapp.com/
+
 ## Getting started
 To get started with the app, clone the repo and then install the needed gems:
 ```sh
