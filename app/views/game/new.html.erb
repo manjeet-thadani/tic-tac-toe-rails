@@ -2,7 +2,6 @@
 <p id="grid-size" hidden><%= @game.board.size %></p>
 <p id="first-player" hidden><%= @game.first_player %></p>
 
-<%# TODO: get this value from API %>
 <p id="computer-mode" hidden><%= @game.player_1_type == "computer" || @game.player_2_type == "computer" %></p>
 
 <div class="game">
@@ -19,5 +18,7 @@
 
   <a id="reset" href="/">
     New Game!
-  </div>
+  </a>
 </div>
+
+<div class="overlay hide"></div>

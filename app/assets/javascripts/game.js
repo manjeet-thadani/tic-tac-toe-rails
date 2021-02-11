@@ -1,6 +1,6 @@
 var ttt =
     function() {
-        var cells, gameId;
+        var cells, gameId, overlay;
         var boardCells, boardSize, computerMode, firstPlayerMarker, currentPlayerMarker, reqInProgress = false,
             gameOver = false;
 
@@ -8,6 +8,7 @@ var ttt =
             gameId = document.getElementById("game-id").innerHTML;
             computerMode = document.getElementById("computer-mode").innerHTML;
             cells = document.querySelectorAll(".cell");
+            overlay = document.querySelector(".overlay");
 
             firstPlayerMarker = document.getElementById("first-player").innerHTML;
             currentPlayerMarker = firstPlayerMarker;
@@ -36,7 +37,6 @@ var ttt =
 
             if (gameOver || reqInProgress) return;
 
-            // TODO ovberlay with z-index
             var request = {
                 "id": gameId,
                 "position": selectedPosition,
@@ -71,10 +71,13 @@ var ttt =
                     alert("Ohhoo! Some Error Occurred");
                 }
 
+                _hideOverlay();
                 reqInProgress = false
             }
 
+            _showOverlay();
             reqInProgress = true
+
             xhr.send(JSON.stringify(request));
         }
 
@@ -107,6 +110,17 @@ var ttt =
 
             currentPlayerMarker = response.next_turn;
         }
+
+        var _showOverlay = function() {
+            overlay.classList.remove("hide");
+            overlay.classList.add("show");
+        }
+
+        var _hideOverlay = function() {
+            overlay.classList.remove("show");
+            overlay.classList.add("hide");
+        }
+
         return {
             setup,
         }
