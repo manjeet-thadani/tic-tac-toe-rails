@@ -15,9 +15,7 @@ class GameController < ApplicationController
   def start
     # TODO: validate input data
     mode = params[:mode]
-    @game = Game.setup
-
-    p @game.cells
+    @game = Game.setup(mode: mode)
 
     redirect_to :action => 'new', id: @game.id
   end
