@@ -29,7 +29,6 @@ var ttt =
 
         var _cellSelected = function(event) {
             var selectedPosition = this.id;
-            // TODO: remove listener from this cell
             if (boardCells[selectedPosition] !== "") {
                 alert("Invalid Move!");
                 return;
@@ -44,9 +43,12 @@ var ttt =
                 "board": boardCells
             };
 
-            // update cell o show selected position till API response is obtained
+            // update cell to show selected position till API response is obtained
             var cell = document.getElementById("" + selectedPosition);
             cell.className = "cell " + currentPlayerMarker;
+
+            // remove listener once cell is clicked
+            cell.removeEventListener("click", _cellSelected);
 
             var message = "Processing! Please wait..."
             if (computerMode == "true") {
